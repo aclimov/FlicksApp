@@ -1,8 +1,22 @@
 <?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/backg">
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical" >
+
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="match_parent" android:layout_height="match_parent"
-    android:background="@drawable/backg"
+    android:layout_width="match_parent" android:layout_height="wrap_content"
     xmlns:tools="http://schemas.android.com/tools">
+
     <com.google.android.youtube.player.YouTubePlayerView
         android:id="@+id/player"
         android:layout_width="match_parent"
@@ -19,13 +33,37 @@
         android:textStyle="bold"
         tools:text="Fifty Shades Darker" />
 
+    <TextView
+        android:id="@+id/tvGenres"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/tvTitle"
+        android:textColor="#ffffff"
+        android:textStyle="italic"
+        android:textSize="12sp"
+        android:layout_marginTop="5dp"
+        android:layout_marginLeft="7dp"
+        tools:text="Action,Horror"/>
+
+    <ImageView
+        android:layout_width="27dp"
+        android:layout_height="wrap_content"
+        android:adjustViewBounds="true"
+        android:scaleType="fitXY"
+        android:id="@+id/ivImdb"
+        android:src="@drawable/imdbicon"
+        android:layout_below="@+id/tvTitle"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true"
+        android:layout_marginRight="7dp"/>
+
     <RatingBar
         android:id="@+id/ratingBar"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true"
-        android:layout_below="@+id/tvTitle"
+        android:layout_below="@+id/tvGenres"
         android:layout_marginTop="13dp"
         android:numStars="5"
         android:stepSize="1"
@@ -37,7 +75,7 @@
         android:layout_height="wrap_content"
         android:layout_toEndOf="@+id/ratingBar"
         android:layout_toRightOf="@+id/ratingBar"
-        android:layout_below="@+id/tvTitle"
+        android:layout_below="@+id/tvGenres"
         android:textColor="#DAA520"
         android:textStyle="bold"
         android:textSize="12sp"
@@ -46,7 +84,7 @@
         tools:text="Release date:Feb-28"/>
 
     <TextView
-        android:id="@+id/tvOverview"
+        android:id="@+id/tvDirectedBy"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentLeft="true"
@@ -54,7 +92,49 @@
         android:layout_below="@+id/ratingBar"
         android:layout_margin="7dp"
         android:textColor="@android:color/white"
+        android:textSize="14sp"
+        tools:text="When a wounded Christian Grey tries to entice a cautious Ana Steele back into his life, she demands a new arrangement before she will give him another chance. As the two begin to build trust and find stability, shadowy figures from Christian’s past start to circle the couple, determined to destroy their hopes for a future together."/>
+
+
+    <TextView
+        android:id="@+id/tvOverview"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_below="@+id/tvDirectedBy"
+        android:layout_margin="7dp"
+        android:textColor="@android:color/white"
         android:textStyle="italic"
-        android:textSize="14sp"/>
+        android:textSize="14sp"
+        tools:text="When a wounded Christian Grey tries to entice a cautious Ana Steele back into his life, she demands a new arrangement before she will give him another chance. As the two begin to build trust and find stability, shadowy figures from Christian’s past start to circle the couple, determined to destroy their hopes for a future together."/>
+
+    <TextView
+        android:id="@+id/tvReviews"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_below="@+id/tvOverview"
+        android:layout_margin="7dp"
+        android:textColor="#DAA520"
+        android:textStyle="bold"
+        android:textSize="16sp"
+        android:text="Reviews"
+        tools:text="Reviews:"/>
+
+
+
 
 </RelativeLayout>
+
+        <ListView
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_margin="15dp"
+            android:id="@+id/lvReviews" />
+
+        </LinearLayout>
+
+    </ScrollView>
+</LinearLayout>

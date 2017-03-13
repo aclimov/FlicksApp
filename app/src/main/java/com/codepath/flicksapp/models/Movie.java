@@ -15,6 +15,22 @@ import java.util.Date;
 
 public class Movie implements Serializable   {
 
+
+    public String getGenres()    {
+        return genres.toString();
+
+    }
+
+    public ArrayList<String> getReviews()
+    {
+        return reviews;
+    }
+
+    public String getImdbUrl()
+    {
+        return String.format("http://www.imdb.com/title/%s/",imdbId);
+    }
+
     public enum MovieType {
        POPULAR,NOPOPULAR
     }
@@ -49,8 +65,14 @@ public class Movie implements Serializable   {
         double d=voteAverage/2;
         return (float) d;
     }
+    public String getDirectedBy()
+    {
+        return directedBy.toString();
+    }
 
-
+    StringBuilder genres ;
+    ArrayList<String> reviews;
+    String imdbId;
     String posterPath;
     String originalTitle;
     String overview;
@@ -59,6 +81,7 @@ public class Movie implements Serializable   {
     Double voteAverage;
     Date releaseDate;
     Boolean isReleaseDateSpecified;
+    StringBuilder directedBy;
 
     public Movie(JSONObject jsonObject) throws JSONException
     {
@@ -110,5 +133,44 @@ public class Movie implements Serializable   {
     {
         //return MovieType.POPULAR;
            return (this.voteAverage>=7)?MovieType.POPULAR:MovieType.NOPOPULAR;
+    }
+
+    public void getDetails(JSONObject jsonObject) throws JSONException
+    {
+        this.imdbId = jsonObject.getString("imdb_id");
+        JSONArray genresJSON = jsonObject.getJSONArray("genres");
+        genres = new StringBuilder();
+        String prefix = "";
+        for(int i =0;i<genresJSON.length();i++){
+            genres.append(prefix);
+            prefix = ", ";
+            genres.append(((JSONObject)genresJSON.get(i)).getString("name"));
+        }
+        reviews = new ArrayList<>();
+
+        JSONObject reviewsJSONObj = jsonObject.getJSONObject("reviews");
+        if(reviewsJSONObj!=null) {
+            JSONArray reviewsJSON = reviewsJSONObj.getJSONArray("results");
+
+
+            int counter = reviewsJSON.length() > 5 ? 5 : reviewsJSON.length();
+            for (int i = 0; i < counter; i++) {
+                reviews.add(((JSONObject) reviewsJSON.get(i)).getString("content"));
+            }
+        }
+
+        directedBy = new StringBuilder();
+        JSONObject creditsObj = jsonObject.getJSONObject("credits");
+        if(creditsObj!=null) {
+            JSONArray  crewJSONArray= creditsObj.getJSONArray("crew");
+            prefix = "";
+            for(int i =0;i<crewJSONArray.length();i++){
+                if(((JSONObject)crewJSONArray.get(i)).getString("job").equals("Director")) {
+                    directedBy.append(prefix);
+                    prefix = ", ";
+                    directedBy.append(((JSONObject) crewJSONArray.get(i)).getString("name"));
+                }
+            }
+        }
     }
 }

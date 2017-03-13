@@ -34,4 +34,7 @@ dependencies {
     compile 'com.squareup.picasso:picasso:2.6.0-SNAPSHOT'
     compile 'jp.wasabeef:picasso-transformations:2.1.0'
     compile files('libs/YouTubeAndroidPlayerApi.jar')
+
+    compile 'com.jakewharton:butterknife:8.4.0'
+    annotationProcessor 'com.jakewharton:butterknife-compiler:8.4.0'
 }
